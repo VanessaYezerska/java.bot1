@@ -30,17 +30,13 @@ public class Library extends TelegramLongPollingBot {
         Message message = update.getMessage();
         System.out.println("Повідомлення від користувача: " + message.getText());
         SendMessage sendMessage = new SendMessage();
-        sendMessage.setText("Будь ласка, введіть вашу спеціальність.");
+        sendMessage.setText("Будь ласка, оберіть Вашу спеціальність.");
         sendMessage.setChatId(String.valueOf(message.getChatId()));
 
 
         if (message.getText().equals("/start")){
-            String text ="Вітаю! Це бібліотека ЛДУ БЖД. Тут ви можете знайти книги, для вашої спеціальності.\n";
-//            text = text + "Інститут цивільного захисту:\n";
-//            text = text + "Кібербезпека\n";
-//            text = text + "Комп'ютерні науки\n";
-//            text = text + "Екологія\n";
-//            text = text + "Цивільна безпека\n";
+            String text ="Вітаю! Це бібліотека ЛДУ БЖД. Тут Ви можете знайти книги для Вашої спеціальності.\n";
+            text = text + "Оберіть спеціальність, на якій навчаєтесь)\n";
 
             sendMessage.enableMarkdown(true);
             ReplyKeyboardMarkup keyboardMarkup = getBooksKeyboard();
@@ -79,12 +75,16 @@ public class Library extends TelegramLongPollingBot {
             books = books + "3. Цивільний захист України. Навчальний посібник для студентів вищих навчальних закладів\n";
 
             sendMessage.setText(books);
+
         }
+
         try {
             execute(sendMessage);
-        }catch (TelegramApiException e){
+        }catch (TelegramApiException e) {
             e.printStackTrace();
         }
+
+
    }
    private ReplyKeyboardMarkup getBooksKeyboard(){
        ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
